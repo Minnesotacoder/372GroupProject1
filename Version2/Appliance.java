@@ -21,7 +21,7 @@ public class Appliance implements Serializable {
 	private String brandName;
 	private String modelName;
 	private String id;
-	// Add int stock
+	private int stock;
 	private Customer purchasedBy;
 	private List backOrders = new LinkedList();
 	private Calendar dueDate;
