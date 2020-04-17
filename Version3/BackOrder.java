@@ -1,4 +1,3 @@
-
 /**
  * 
  * @modelName Brahma Dathan and Sarnath Ramnath
@@ -19,8 +18,8 @@
  * and are not responsible for any loss or damage resulting from its use.  
  */
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Represents a single backOrder on a appliance by a customer
@@ -29,62 +28,52 @@ import java.util.GregorianCalendar;
  *
  */
 public class BackOrder implements Serializable {
-    private Appliance appliance;
-    private Customer customer;
-    private Calendar date;
+	private Appliance appliance;
+	private Customer customer;
+	private int quantity;
 
-    /**
-     * The customer and appliance are stored. The date is computed by adding the
-     * duration days to the current date.
-     * 
-     * @param customer
-     *            who places the backOrder
-     * @param appliance
-     *            the appliance on which backOrder is placed
-     * @param duration
-     *            for how long the backOrder is valid
-     */
-    public BackOrder(Customer customer, Appliance appliance, int duration) {
-        this.appliance = appliance;
-        this.customer = customer;
-        date = new GregorianCalendar();
-        date.add(Calendar.DATE, duration);
-    }
+	Queue<BackOrder> backOrderQueue = new LinkedList<BackOrder>();
 
-    /**
-     * Getter for Customer
-     * 
-     * @return Customer who has the backOrder
-     */
-    public Customer getCustomer() {
-        return customer;
-    }
+	/**
+	 * The customer and appliance and quantity are stored.
+	 * 
+	 * @param customer  who places the backOrder
+	 * @param appliance the appliance on which backOrder is placed
+	 * @param quantity  of which customer has purchased
+	 */
 
-    /**
-     * Getter for Appliance
-     * 
-     * @return Appliance being held
-     */
-    public Appliance getAppliance() {
-        return appliance;
-    }
+	public BackOrder(Customer customer, Appliance appliance, int quantity) {
+		this.appliance = appliance;
+		this.customer = customer;
+		this.quantity = quantity;
 
-    /**
-     * Getter for date
-     * 
-     * @return date until which the backOrder is valid
-     */
-    public Calendar getDate() {
-        return date;
-    }
+	}
 
-    /**
-     * Checks whether the backOrder has become invalid because the last date has
-     * passed
-     * 
-     * @return true iff the backOrder is valid
-     */
-    public boolean isValid() {
-        return (System.currentTimeMillis() < date.getTimeInMillis());
-    }
+	/**
+	 * Getter for Customer
+	 * 
+	 * @return Customer who has the backOrder
+	 */
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	/**
+	 * Getter for Appliance
+	 * 
+	 * @return Appliance on backOrder
+	 */
+	public Appliance getAppliance() {
+		return appliance;
+	}
+
+	/**
+	 * Getter for quantity
+	 * 
+	 * @return quantity of specific backOrder
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+
 }
